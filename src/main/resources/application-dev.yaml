@@ -1,0 +1,16 @@
+datasource:
+  mentoring:
+    pool-name: mentoring
+    jdbc-url: jdbc:postgresql://localhost:5432/mentoring
+    username: admin_db
+    password: admin_db
+    driver-class-name: org.postgresql.Driver
+
+spring:
+  flyway:
+    enabled: true
+  jpa:
+    properties:
+      active: dev
+      hibernate:
+        default_schema: mentoring

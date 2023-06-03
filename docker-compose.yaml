@@ -1,0 +1,10 @@
+services:
+  db:
+    image: postgres:13.3
+    container_name: "mentoring_project_db"
+    environment:
+      POSTGRES_PASSWORD: "admin_db"
+      POSTGRES_USER: "admin_db"
+      POSTGRES_DB: "mentoring"
+    ports:
+      - "5432:5432"
