@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS MENTORING.WORKERS_TAB
     password                            VARCHAR(50) NOT NULL,
     job                                 VARCHAR(50) NOT NULL,
     city                                VARCHAR(50) NOT NULL,
-    time_4screenshots                   TIME[0] DEFAULT '00:01:00',
+    time_4screenshots                   TIME DEFAULT '01:00:00',
     PRIMARY KEY(id)
 );

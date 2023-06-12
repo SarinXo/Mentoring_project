@@ -1,3 +1,12 @@
+spring:
+  flyway:
+    enabled: true
+    schemas: mentoring
+  jpa:
+    properties:
+      hibernate:
+        default_schema: mentoring
+
 datasource:
   mentoring:
     pool-name: mentoring
@@ -6,11 +15,3 @@ datasource:
     password: admin_db
     driver-class-name: org.postgresql.Driver
 
-spring:
-  flyway:
-    enabled: true
-  jpa:
-    properties:
-      active: dev
-      hibernate:
-        default_schema: mentoring
