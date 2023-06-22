@@ -1,0 +1,33 @@
+package mvc.project.handler.exception;
+
+public abstract class BaseApiException extends RuntimeException {
+    private final String code;
+    private final String message;
+    private final String description;
+
+    protected BaseApiException(String code, String message, String description) {
+        this.code = code;
+        this.message = message;
+        this.description = description;
+    }
+
+    public String getCode() {
+        return this.code;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+    public String getDescription() {
+        return this.description;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseApiException(code=" + this.getCode()
+                + ", message=" + this.getMessage()
+                + ", description=" + this.getDescription() + ")";
+    }
+
+
+}

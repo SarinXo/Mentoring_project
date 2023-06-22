@@ -6,6 +6,8 @@ spring:
     properties:
       hibernate:
         default_schema: mentoring
+  thymeleaf:
+    enabled: true
 
 datasource:
   mentoring:
