@@ -1,5 +1,6 @@
 package mvc.project.config;
 
+import mvc.project.handler.AuthSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,7 +26,7 @@ public class WebSecurityConfig{
                 .formLogin((form) -> form
                         .loginPage("/auth")
                         .permitAll()
-                        .defaultSuccessUrl("/admin/home", true)
+                        .successHandler(new AuthSuccessHandler())
                         .failureUrl("/auth?error")
 
                 )

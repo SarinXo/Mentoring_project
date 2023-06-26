@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler
+    public ResponseEntity<ErrorDto> catchResourceNotFoundException
+            (BaseApiException e) {
+        return new ResponseEntity<>(convertErrorToDto(e), HttpStatusCode.valueOf(500));
+    }
     private ErrorDto convertErrorToDto(BaseApiException e){
         ErrorDto err = new ErrorDto();
         err.id("---");
@@ -17,11 +22,5 @@ public class GlobalExceptionHandler {
         err.message(e.getMessage());
         err.description(e.getDescription());
         return err;
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<ErrorDto> catchResourceNotFoundException
-            (BaseApiException e) {
-        return new ResponseEntity<>(convertErrorToDto(e), HttpStatusCode.valueOf(500));
     }
 }
