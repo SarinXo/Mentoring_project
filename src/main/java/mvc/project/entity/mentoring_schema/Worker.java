@@ -11,6 +11,8 @@ import java.util.*;
 @NoArgsConstructor
 @Table(name = "workers_tab")
 public class Worker {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -61,6 +63,15 @@ public class Worker {
         this.isDeleted = false;
     }
 
+    public Worker(String fio, String email, String password, String job, String city, String time4screenshots) {
+        this.fio = fio;
+        this.email = email;
+        this.password = password;
+        this.job = job;
+        this.city = city;
+        this.time4screenshots = time4screenshots;
+    }
+
     public Integer id() {
         return id;
     }
@@ -95,5 +106,28 @@ public class Worker {
 
     public String city() {
         return city;
+    }
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setTime4screenshots(String time4screenshots) {
+        this.time4screenshots = time4screenshots;
     }
 }

@@ -1,6 +1,8 @@
 package mvc.project.service.Impl;
 
 import lombok.AllArgsConstructor;
+import mvc.project.entity.dto.SessionDto;
+import mvc.project.entity.dto.WorkerForUserTableDto;
 import mvc.project.entity.dto.WorkerInfoDto;
 import mvc.project.entity.mentoring_schema.Worker;
 import mvc.project.handler.exception.IncorrectLoginInformationException;
@@ -9,12 +11,13 @@ import mvc.project.repository.WorkerRepository;
 import mvc.project.service.WorkerServiceConnectWithApplication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
 @AllArgsConstructor
 public class WorkerServiceImpl implements WorkerServiceConnectWithApplication {
-
     private final WorkerRepository workerRepository;
 
     @Override
@@ -45,5 +48,25 @@ public class WorkerServiceImpl implements WorkerServiceConnectWithApplication {
         return new WorkerInfoDto(worker);
     }
 
+    @Override
+    public List<WorkerForUserTableDto> findAllExistingWorkers4Table(){
+        List<Worker> workers = workerRepository.findAll();
+        return findExistingWorkersWithConvert(workers);
+    }
+
+    private List<WorkerForUserTableDto> findExistingWorkersWithConvert(List<Worker> workers){
+        List<WorkerForUserTableDto> newWorkers = new ArrayList<>();
+        for (var worker:
+             workers) {
+            if(!worker.isDeleted())
+                newWorkers.add( new WorkerForUserTableDto(worker) );
+        }
+        return newWorkers;
+    }
+
+    @Override
+    public void saveWorker(Worker worker){
+        workerRepository.save(worker);
+    }
 
 }

@@ -3,7 +3,6 @@ package mvc.project.controller;
 import lombok.AllArgsConstructor;
 import mvc.project.entity.dto.WorkerInfoDto;
 import mvc.project.service.WorkerServiceConnectWithApplication;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
