@@ -15,10 +15,10 @@ public class WorkerForUserTableDto {
     private String email;
 
     public WorkerForUserTableDto(Worker worker) {
-        this.id = worker.id();
-        this.fio = worker.fio();
-        this.city = worker.city();
-        this.email = worker.email();
+        this.id = worker.getId();
+        this.fio = worker.getFio();
+        this.city = worker.getCity();
+        this.email = worker.getEmail();
     }
 
     public Integer id() {

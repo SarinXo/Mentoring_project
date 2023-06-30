@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import mvc.project.entity.mentoring_schema.Worker;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,14 +19,14 @@ public class WorkerInfoDto {
     private Integer id;
     private String fio;
     private String job;
-    private String time4screenshots;
+    private LocalTime time4screenshots;
     private List<SessionDto> sessionList = new ArrayList<>();
 
     public WorkerInfoDto(Worker worker){
-        this.id = worker.id();
-        this.fio = worker.fio();
-        this.job = worker.job();
-        this.time4screenshots = worker.time4screenshots();
+        this.id = worker.getId();
+        this.fio = worker.getFio();
+        this.job = worker.getJob();
+        this.time4screenshots = worker.getTime4screenshots();
         this.sessionList = worker.sessionList().stream().map(SessionDto::new).collect(Collectors.toList());
     }
 
@@ -40,7 +42,7 @@ public class WorkerInfoDto {
         return job;
     }
 
-    public String time4screenshots() {
+    public LocalTime time4screenshots() {
         return time4screenshots;
     }
 

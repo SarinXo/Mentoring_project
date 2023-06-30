@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+###node modules
+**/Mentoring_project/node_modules/

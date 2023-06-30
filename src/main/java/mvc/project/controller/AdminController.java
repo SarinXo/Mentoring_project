@@ -1,27 +1,23 @@
 package mvc.project.controller;
 
-import lombok.AllArgsConstructor;
 import mvc.project.entity.dto.WorkerForUserTableDto;
 import mvc.project.entity.mentoring_schema.Worker;
-import mvc.project.service.WorkerServiceConnectWithApplication;
+import mvc.project.service.WorkerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static mvc.project.checker.AddWorkerChecker.isCorrectData;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    private Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
-            "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");;
-    private Matcher matcher;
-    private final WorkerServiceConnectWithApplication workerServiceConnectWithApplication;
+    private final WorkerService workerService;
 
-    public AdminController(WorkerServiceConnectWithApplication workerServiceConnectWithApplication) {
-        this.workerServiceConnectWithApplication = workerServiceConnectWithApplication;
+    public AdminController(WorkerService workerService) {
+        this.workerService = workerService;
     }
 
     @GetMapping("/home")
@@ -31,13 +27,15 @@ public class AdminController {
 
     @ModelAttribute("workers4table1")
     public List<WorkerForUserTableDto> messages() {
-        return workerServiceConnectWithApplication.findAllExistingWorkers4Table();
+        return workerService.findAllExistingWorkers4Table();
     }
     @GetMapping("/add_worker")
     public String addWorkerForm(@RequestParam(value = "error", required = false) String error,
+                                @RequestParam(value = "ok", required = false) String ok,
                                 Model model) {
         Worker worker = new Worker();
         model.addAttribute("error", error != null);
+        model.addAttribute("ok", error != null);
         model.addAttribute("worker", worker);
         return "admin/add_worker";
     }
@@ -45,27 +43,11 @@ public class AdminController {
     @PostMapping("/save_worker")
     public String saveWorker(@ModelAttribute("worker") Worker worker) {
         if(isCorrectData(worker)) {
-            workerServiceConnectWithApplication.saveWorker(worker);
+            workerService.saveWorker(worker);
+            return "redirect:/admin/add_worker?ok";
         }
-        return "redirect:/admin/add_worker";
+        return "redirect:/admin/add_worker?error";
     }
 
-    private boolean isCorrectData(Worker worker){
-        if(isNotCorrectEmail(worker.email())){
-            return false;
-        }
-        //if(isNotCorrectTime()){
-//
-        //}
-        return true;
-    }
 
-    private boolean isNotCorrectEmail(String email){
-        return !pattern.matcher(email).matches();
-    }
-
-    //private boolean isNotCorrectTime(){
-    //
-    //}
-//
 }

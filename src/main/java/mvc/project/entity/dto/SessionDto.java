@@ -14,7 +14,7 @@ public class SessionDto {
     private String timeFinish;
 
     public SessionDto(Session session){
-        this.workerId = session.workerId().id();
+        this.workerId = session.workerId().getId();
         this.timeStart = session.timeStart();
         this.timeFinish = session.timeFinish();
     }
