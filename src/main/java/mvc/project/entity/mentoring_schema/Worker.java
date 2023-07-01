@@ -24,7 +24,6 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "workers_tab")
 public class Worker {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -38,7 +37,7 @@ public class Worker {
     @Column(name = "time_4screenshots")
     private LocalTime time4screenshots;
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private boolean isDeleted;
 
     public List<Session> sessionList() {
         return sessionList;
@@ -89,7 +88,7 @@ public class Worker {
         return id;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setIsDeleted(boolean deleted) {
         isDeleted = deleted;
     }
 
@@ -101,7 +100,7 @@ public class Worker {
         return password;
     }
 
-    public Boolean getIsDeleted() {
+    public boolean getIsDeleted() {
         return isDeleted;
     }
 

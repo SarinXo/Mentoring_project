@@ -34,6 +34,7 @@ public class AdminController {
                                 @RequestParam(value = "ok", required = false) String ok,
                                 Model model) {
         Worker worker = new Worker();
+        worker.setIsDeleted(false);
         model.addAttribute("error", error != null);
         model.addAttribute("ok", error != null);
         model.addAttribute("worker", worker);
@@ -49,5 +50,11 @@ public class AdminController {
         return "redirect:/admin/add_worker?error";
     }
 
+    @GetMapping("/update_worker/{id}")
+    public String updateWorker(@PathVariable ( value = "id") Integer id, Model model) {
+        Worker worker = workerService.findById(id);
+        model.addAttribute("worker", worker);
+        return "/admin/update_worker";
+    }
 
 }

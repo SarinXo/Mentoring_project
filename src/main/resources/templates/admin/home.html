@@ -13,6 +13,7 @@
 
 <body>
 <div class="container">
+    <title>Домашняя страница</title>
     <h1>Информация о работниках</h1>
     <a th:href="@{/admin/add_worker}" class="btn btn-primary btn-sm mb-3"> Добавить работника</a>
     <table class="table table-striped table-bordered table-sm" th:width="70">
@@ -30,6 +31,7 @@
             <td th:text="${worker.fio()}"></td>
             <td th:text="${worker.city()}"></td>
             <td th:text="${worker.email()}"></td>
+            <td> <a th:href="@{/admin/update_worker/{id}(id=${worker.id()})}" class="btn btn-primary">Update</a></td>
         </tr>
         </tbody>
     </table>
