@@ -84,6 +84,9 @@ public class Worker {
         this.isDeleted = false;
     }
 
+    public void setId(int Id) {
+        this.id = id;
+    }
     public Integer getId() {
         return id;
     }
@@ -116,7 +119,11 @@ public class Worker {
         return time4screenshots;
     }
 
-    public String photoReference() {
+    public String setPhotoReference() {
+        return photoReference;
+    }
+
+    public String getPhotoReference() {
         return photoReference;
     }
 

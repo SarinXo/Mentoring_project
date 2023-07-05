@@ -19,13 +19,15 @@
     <div th:if="${param.error}" class="alert alert-danger">
         Введены некорректные данные! Попробуйте снова.
     </div>
-    <form action="#" th:action="@{/admin/save_worker}" th:object="${worker}" method="PATCH">
-        <input type="text" th:field="*{fio}"              placeholder="Введите ФИО"                             class="form-control mb-4 col-4">
-        <input type="text" th:field="*{email}"            placeholder="Введите адрес почты"                     class="form-control mb-4 col-4">
-        <input type="text" th:field="*{password}"         placeholder="Введите пароль работника"                class="form-control mb-4 col-4">
-        <input type="text" th:field="*{job}"              placeholder="Введите должность работника"             class="form-control mb-4 col-4">
-        <input type="text" th:field="*{city}"             placeholder="Введите город проживания"                class="form-control mb-4 col-4">
-        <input type="time" th:field="*{time4screenshots}" placeholder="Введите время для скриншотов"            class="form-control mb-4 col-4">
+    <form action="#" th:action="@{/admin/update}" th:object="${worker}" method="POST">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{photoReference}"/>
+        <input type="text"   th:field="*{fio}"              placeholder="Введите ФИО"                    class="form-control mb-4 col-4"/>
+        <input type="text"   th:field="*{email}"            placeholder="Введите адрес почты"            class="form-control mb-4 col-4"/>
+        <input type="text"   th:field="*{password}"         placeholder="Введите пароль работника"       class="form-control mb-4 col-4"/>
+        <input type="text"   th:field="*{job}"              placeholder="Введите должность работника"    class="form-control mb-4 col-4"/>
+        <input type="text"   th:field="*{city}"             placeholder="Введите город проживания"       class="form-control mb-4 col-4"/>
+        <input type="time"   th:field="*{time4screenshots}" placeholder="Введите время для скриншотов"   class="form-control mb-4 col-4"/>
         <button type="submit" class="btn btn-info col-2"> Подтвердить</button>
     </form>
     <hr>

@@ -8,6 +8,9 @@ import mvc.project.handler.exception.IncorrectLoginInformationException;
 import mvc.project.handler.exception.NotFoundApiException;
 import mvc.project.repository.WorkerRepository;
 import mvc.project.service.WorkerService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,22 +24,15 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker findWorkerByEmail(String email) throws NotFoundApiException{
-        Worker worker = workerRepository.findByEmail(email).orElse(null);
-
-        if (Objects.isNull(worker)) {
-            throw NotFoundApiException.Builder.notFoundApiException().build();
-        }
-
-        return worker;
+        return workerRepository.findByEmail(email)
+                .orElseThrow(() -> NotFoundApiException.Builder.notFoundApiException().build());
     }
 
     @Override
-    public WorkerInfoDto authInApp(String email, String password){
-        Worker worker = workerRepository.findByEmail(email).orElse(null);
-
-        if (Objects.isNull(worker)) {
-            throw NotFoundApiException.Builder.notFoundApiException().build();
-        }
+    public WorkerInfoDto authInApp(String email, String password) throws NotFoundApiException{
+        //duple
+        Worker worker = workerRepository.findByEmail(email).
+                orElseThrow(() -> NotFoundApiException.Builder.notFoundApiException().build());
 
         if(!Objects.equals(worker.getPassword(), password)
                 || worker.getIsDeleted()){
@@ -68,15 +64,19 @@ public class WorkerServiceImpl implements WorkerService {
         workerRepository.save(worker);
     }
 
-    @Override
-    public Worker findById(Integer id) throws NotFoundApiException{
-        Worker worker = workerRepository.findById(id).orElse(null);
-
-        if (Objects.isNull(worker)) {
-            throw NotFoundApiException.Builder.notFoundApiException().build();
-        }
-
-        return worker;
+    public void deleteWorkerById(int id){
+        workerRepository.deleteById(id);
     }
 
+    @Override
+    public Worker findById(Integer id) throws NotFoundApiException{
+        return workerRepository.findById(id)
+                .orElseThrow(() -> NotFoundApiException.Builder.notFoundApiException().build());
+    }
+
+    @Override
+    public Page<Worker> findPaginated(int pageNo, int pageSize){
+        Pageable page = PageRequest.of(pageNo-1, pageSize);
+        return workerRepository.findAll(page);
+    }
 }
